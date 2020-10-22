@@ -16,6 +16,7 @@ namespace Capstone4ShoppingList.Controllers
         private readonly CapstoneShoppingListDBContext _context;
         public DbSet<ShoppingListDetails> shoppingListDetails;
         public DbSet<ShoppingList> shoppingLists;
+        public DbSet<ProductList> productLists;
 
         public ProductListsController(CapstoneShoppingListDBContext context)
         {
@@ -32,6 +33,16 @@ namespace Capstone4ShoppingList.Controllers
         public IActionResult AddToCart(int Id)
         {
             var product = _context.ProductList.FirstOrDefault(_ => _.Id == Id);
+            var shoppingListDetails = new ShoppingListDetails();
+          
+            shoppingListDetails.ProductId = product.Id;
+            shoppingListDetails.Quantity=1;
+            shoppingListDetails.Price = product.Price;
+            shoppingListDetails.Product = product;
+
+            _context.ShoppingListDetails.Add(shoppingListDetails);
+            _context.SaveChanges();
+            
             
             return View(product);
         }
