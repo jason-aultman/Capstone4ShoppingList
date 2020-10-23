@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Capstone4ShoppingList.Context;
+using Capstone4ShoppingList.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace Capstone4ShoppingList
         {
             services.AddControllersWithViews();
             services.AddDbContext<CapstoneShoppingListDBContext>();
+            services.AddSingleton<IDBSetup, DBSetup>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

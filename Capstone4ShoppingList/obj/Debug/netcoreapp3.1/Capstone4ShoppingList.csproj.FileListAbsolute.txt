@@ -174,3 +174,4 @@ C:\Users\jason\source\repos\Capstone4ShoppingList\Capstone4ShoppingList\obj\Debu
 C:\Users\jason\source\repos\Capstone4ShoppingList\Capstone4ShoppingList\obj\Debug\netcoreapp3.1\Razor\Views\ProductLists\Edit.cshtml.g.cs
 C:\Users\jason\source\repos\Capstone4ShoppingList\Capstone4ShoppingList\obj\Debug\netcoreapp3.1\Razor\Views\ProductLists\Index.cshtml.g.cs
 C:\Users\jason\source\repos\Capstone4ShoppingList\Capstone4ShoppingList\obj\Debug\netcoreapp3.1\Razor\Views\ProductLists\AddToCart.cshtml.g.cs
+C:\Users\jason\source\repos\Capstone4ShoppingList\Capstone4ShoppingList\obj\Debug\netcoreapp3.1\Razor\Views\ProductLists\Checkout.cshtml.g.cs

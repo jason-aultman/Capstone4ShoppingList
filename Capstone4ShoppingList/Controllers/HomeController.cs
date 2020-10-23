@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Capstone4ShoppingList.Models;
+using Capstone4ShoppingList.Services;
+using Capstone4ShoppingList.Context;
 
 namespace Capstone4ShoppingList.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+       // private readonly IDBSetup _DBSetup;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDBSetup setup)
         {
             _logger = logger;
+          //  _DBSetup = setup;
+          //  setup.createNew(new CapstoneShoppingListDBContext());
         }
 
         public IActionResult Index()

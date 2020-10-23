@@ -8,16 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Capstone4ShoppingList.Context;
 using Capstone4ShoppingList.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Security.Cryptography.Xml;
 
 namespace Capstone4ShoppingList.Controllers
 {
     public class ProductListsController : Controller
     {
         private readonly CapstoneShoppingListDBContext _context;
-        public DbSet<ShoppingListDetails> shoppingListDetails;
-        public DbSet<ShoppingList> shoppingLists;
-        public DbSet<ProductList> productLists;
-
+      //  public DbSet<ShoppingListDetails> shoppingListDetails;
+      //  public DbSet<ShoppingList> shoppingLists;
+     //   public DbSet<ProductList> productLists;
+        
         public ProductListsController(CapstoneShoppingListDBContext context)
         {
             _context = context;
@@ -69,6 +70,23 @@ namespace Capstone4ShoppingList.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        public IActionResult Checkout()
+        {
+           var cart = _context.ShoppingListDetails;
+           var table2 = _context.ProductList;
+            var checkout = new CheckoutModel();
+           
+            var productQuery = (from s in cart
+                         join p in table2
+                         on s.ProductId equals p.Id
+                         select s.Product).ToList();
+            
+            checkout.Items = productQuery;
+            checkout.Total = (double)productQuery.Sum(_ => _.Price);
+            checkout.Tax = Math.Round((checkout.Total * .06), 2, MidpointRounding.AwayFromZero);
+            checkout.GrandTotal = checkout.Total + checkout.Tax;
+            return View(checkout);
         }
 
         // POST: ProductLists/Create

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Checkout";
+}
+@model CheckoutModel
+
+
+<h1>Checkout</h1>
+
+<table>
+
+
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Product)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <th>
+                @Html.DisplayNameFor(modelItem => item.Price)
+
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<div>
+    <label><b>Subtotal:</b></label>
+    @Html.DisplayFor(modelItem => Model.Total)
+</div>
+<div>
+    <label><b>Tax: 6%</b></label>
+    @Html.DisplayFor(modelItem => Model.Tax)
+</div>
+<div>
+    <label><b>Total:</b></label>
+    @Html.DisplayFor(modelItem => Model.GrandTotal)
+</div>
+
+
