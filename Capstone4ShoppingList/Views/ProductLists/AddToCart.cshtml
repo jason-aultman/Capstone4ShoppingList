@@ -3,14 +3,16 @@
     ViewData["Title"] = "AddToCart";
 }
 @model ProductList
- 
-<h1>AddToCart</h1>
-
-<p>
-    @Model.Product has been added to your shopping list!
-</p>
-<div>
-    <form asp-action="Index">
-        <input type="submit" value="Add more products" />
-    </form>
-</div>
+<body style="background-color:antiquewhite">
+    <h1>
+        AddToCart
+    </h1>
+    <p>
+        @Model.Product has been added to your shopping list!
+    </p>
+    <div>
+        <form asp-action="Index">
+            <input type="submit" value="Add more products" />
+        </form>
+    </div>
+</body>

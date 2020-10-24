@@ -3,55 +3,56 @@
 @{
     ViewData["Title"] = "Index";
 }
+<body style="background-color:antiquewhite">
+    <h1>Welcome to our virtual storefront!</h1>
+    <h3>
+        Select from our wide variety of products below
+    </h3>
 
-<h1>Welcome to our virtual storefront!</h1>
-<h3>
-    Select from our wide variety of products below
-</h3>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            if (Model != null)
-            {
-                @foreach (var item in Model)
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
 
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                            <a asp-action="AddToCart" asp-route-id="@item.Id">Add Item To Cart</a>
-                        </td>
-                    </tr>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                                <a asp-action="AddToCart" asp-route-id="@item.Id">Add Item To Cart</a>
+                            </td>
+                        </tr>
 
+                    }
+                }else
+                {
+                    @Html.Display("Your cart is empty")
                 }
-            }else
-            {
-                @Html.Display("Your cart is empty")
             }
-        }
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</body>

@@ -20,13 +20,13 @@
     @foreach (var item in Model.Items)
     {
         <tr>
-           
+
             <td style="width:80px">
                 @Html.DisplayFor(modelItem => item.Product)
             </td>
-            
+
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @String.Format("{0:c}", item.Price)
             </td>
 
         </tr>
@@ -35,15 +35,16 @@
 </table>
 <div>
     <label><b>Subtotal:</b></label>
-    @Html.DisplayFor(modelItem => Model.Total)
+    @String.Format("{0:c}", Model.Total)
 </div>
 <div>
     <label><b>Tax: 6%</b></label>
-    @Html.DisplayFor(modelItem => Model.Tax)
+    @String.Format("{0:c}", Model.Tax)
+
 </div>
 <div>
     <label><b>Total:</b></label>
-    @Html.DisplayFor(modelItem => Model.GrandTotal)
+    @String.Format("{0:c}", Model.GrandTotal)
 </div>
 
 
