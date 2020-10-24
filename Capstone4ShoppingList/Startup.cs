@@ -27,6 +27,8 @@ namespace Capstone4ShoppingList
             services.AddControllersWithViews();
             services.AddDbContext<CapstoneShoppingListDBContext>();
             services.AddSingleton<IDBSetup, DBSetup>();
+            services.AddSingleton<IModelMaker, ModelMaker>();
+            services.AddSingleton<IAddsToCart, AddToCart>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

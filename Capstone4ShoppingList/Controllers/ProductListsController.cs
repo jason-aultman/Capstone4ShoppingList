@@ -17,38 +17,25 @@ namespace Capstone4ShoppingList.Controllers
     {
         private readonly CapstoneShoppingListDBContext _context;
         private readonly IDBSetup _dbSetup;
-        
-        public ProductListsController(CapstoneShoppingListDBContext context, IDBSetup setup)
+        private readonly IModelMaker _modelMaker;
+        private readonly IAddsToCart _addsToCart;
+        public ProductListsController(CapstoneShoppingListDBContext context, IDBSetup setup, IModelMaker modelMaker, IAddsToCart addsToCart)
         {
             _context = context;
             _dbSetup = setup;
-          //  _dbSetup.createNew(context);
-
+            _modelMaker = modelMaker;
+            _addsToCart = addsToCart;
         }
 
         // GET: ProductLists
         public async Task<IActionResult> Index()
         {
-            
             return View(await _context.ProductList.ToListAsync());
         }
-       
-
-        
         public IActionResult AddToCart(int Id)
         {
             var product = _context.ProductList.FirstOrDefault(_ => _.Id == Id);
-            var shoppingListDetails = new ShoppingListDetails();
-          
-            shoppingListDetails.ProductId = product.Id;
-            shoppingListDetails.Quantity=1;
-            shoppingListDetails.Price = product.Price;
-            shoppingListDetails.Product = product;
-
-            _context.ShoppingListDetails.Add(shoppingListDetails);
-            _context.SaveChanges();
-            
-            
+            _addsToCart.AddToCart(_context, Id);
             return View(product);
         }
 
@@ -77,19 +64,7 @@ namespace Capstone4ShoppingList.Controllers
         }
         public IActionResult Checkout()
         {
-           var cart = _context.ShoppingListDetails;
-           var table2 = _context.ProductList;
-            var checkout = new CheckoutModel();
-           
-            var productQuery = (from s in cart
-                         join p in table2
-                         on s.ProductId equals p.Id
-                         select s.Product).ToList();
-            
-            checkout.Items = productQuery;
-            checkout.Total = (double)productQuery.Sum(_ => _.Price);
-            checkout.Tax = Math.Round((checkout.Total * .06), 2, MidpointRounding.AwayFromZero);
-            checkout.GrandTotal = checkout.Total + checkout.Tax;
+            var checkout =_modelMaker.MakeModel(_context);
             return View(checkout);
         }
 
