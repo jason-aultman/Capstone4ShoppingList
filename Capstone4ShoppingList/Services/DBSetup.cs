@@ -16,6 +16,7 @@ namespace Capstone4ShoppingList.Services
             {
                 context.ShoppingListDetails.Remove(entity);
             }
+            context.SaveChanges();
         }
     }
 }

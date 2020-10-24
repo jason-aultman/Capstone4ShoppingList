@@ -9,26 +9,30 @@ using Capstone4ShoppingList.Context;
 using Capstone4ShoppingList.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Security.Cryptography.Xml;
+using Capstone4ShoppingList.Services;
 
 namespace Capstone4ShoppingList.Controllers
 {
     public class ProductListsController : Controller
     {
         private readonly CapstoneShoppingListDBContext _context;
-      //  public DbSet<ShoppingListDetails> shoppingListDetails;
-      //  public DbSet<ShoppingList> shoppingLists;
-     //   public DbSet<ProductList> productLists;
+        private readonly IDBSetup _dbSetup;
         
-        public ProductListsController(CapstoneShoppingListDBContext context)
+        public ProductListsController(CapstoneShoppingListDBContext context, IDBSetup setup)
         {
             _context = context;
+            _dbSetup = setup;
+          //  _dbSetup.createNew(context);
+
         }
 
         // GET: ProductLists
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.ProductList.ToListAsync());
         }
+       
 
         
         public IActionResult AddToCart(int Id)

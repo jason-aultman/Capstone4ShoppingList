@@ -41,6 +41,7 @@ namespace Capstone4ShoppingList
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            
 
             app.UseRouting();
 

@@ -1,28 +1,30 @@
 ﻿
 @{
-    ViewData["Title"] = "Checkout";
+    ViewData["Title"] = "Cart";
 }
 @model CheckoutModel
 
 
-<h1>Checkout</h1>
+<h1><u>Cart</u></h1>
 
 <table>
-
+    <tr>
+        <th>
+            Product
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
 
     @foreach (var item in Model.Items)
     {
         <tr>
-            <th>
-                @Html.DisplayNameFor(modelItem => item.Product)
-            </th>
-            <td>
+           
+            <td style="width:80px">
                 @Html.DisplayFor(modelItem => item.Product)
             </td>
-            <th>
-                @Html.DisplayNameFor(modelItem => item.Price)
-
-            </th>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>

@@ -14,13 +14,14 @@ namespace Capstone4ShoppingList.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       // private readonly IDBSetup _DBSetup;
-
-        public HomeController(ILogger<HomeController> logger, IDBSetup setup)
+        private readonly IDBSetup _DBSetup;
+        private readonly CapstoneShoppingListDBContext _context;
+        public HomeController(ILogger<HomeController> logger, IDBSetup setup, CapstoneShoppingListDBContext context)
         {
             _logger = logger;
-          //  _DBSetup = setup;
-          //  setup.createNew(new CapstoneShoppingListDBContext());
+            _DBSetup = setup;
+            _context = context;
+            _DBSetup.createNew(_context);
         }
 
         public IActionResult Index()
